@@ -1,0 +1,42 @@
+###Hello World
+POST {{funcUrl}}/api/fn-hello-world?code={{funcKey}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Bablu"
+}
+
+
+###HTTP function for database query using SQL auth
+# @query1="SELECT TOP(10) [AddressLine1],[AddressLine2],[City],[StateProvince],[CountryRegion],[PostalCode],[rowguid] FROM [SalesLT].[Address];"
+@query_d765j8="SELECT 1;"
+POST {{funcUrl}}/api/fn-query-sql-db-sql-auth?code={{funcKey}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "server" : "azsynapsewksxqwjeq.sql.azuresynapse.net",
+  "database" : "sqldp01", 
+  "query": {{query_d765j8}}
+}
+
+###HTTP function for database query using access token
+@query_12312="SELECT TOP(10) [AddressLine1],[AddressLine2],[City],[StateProvince],[CountryRegion],[PostalCode],[rowguid] FROM [SalesLT].[Address];"
+POST {{funcUrl}}/api/fn-query-sql-db?code={{funcKey}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "server" : "azsynapsewksxqwjeq.sql.azuresynapse.net",
+  "database" : "sqldp01",  
+  "query": {{query_12312}}
+}
+
+###Pause SQL Dedicated Pool
+POST {{funcUrl}}/api/fn-pause-sql-dedicated-pool?code={{funcKey}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "subscriptionId": "edf6dd9d-7c4a-4bca-a997-945f3d60cf4e",
+  "resourceGroupName": "azdemo101-rg-zrlx4",
+  "workspaceName": "azsynapsewksxqwjeq",
+  "sqlPoolName": "sqldp02"
+}
